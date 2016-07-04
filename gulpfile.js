@@ -12,8 +12,8 @@ var gulp         = require('gulp'),
     autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('sass', function(){
-  return gulp.src('app/sass/**/*.sass')
-  .pipe(sass())
+  return gulp.src(['app/sass/**/*.sass', 'sass/**/*.scss'])
+  .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
   .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
   .pipe(gulp.dest('app/css'))
   .pipe(browserSync.reload({stream: true}));
